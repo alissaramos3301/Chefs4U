@@ -97,9 +97,9 @@ function EditEventForm() {
     const fetchConfig = {
       method: "put",
       body: JSON.stringify(data),
+      credentials: "include",
       headers: {
         Authorization: `Bearer ${token}`,
-        credentials: "include",
         "Content-Type": "application/json",
       },
     };
@@ -111,9 +111,11 @@ function EditEventForm() {
     event.preventDefault();
     const serviceUrl = `${process.env.REACT_APP_EVENTS_HOST}/api/events/${id}`;
     const fetchConfig = {
-      Authorization: `Bearer ${token}`,
-      credentials: "include",
       method: "delete",
+      credentials: "include",
+      header: {
+        Authorization: `Bearer ${token}`,
+      },
     };
     fetch(serviceUrl, fetchConfig).then((response) => {
       if (response.ok) {

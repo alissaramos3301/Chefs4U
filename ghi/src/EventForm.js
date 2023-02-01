@@ -55,9 +55,9 @@ function EventForm() {
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(data),
+      credentials: "include",
       headers: {
         Authorization: `Bearer ${token}`,
-        credentials: "include",
         "Content-Type": "application/json",
       },
     };

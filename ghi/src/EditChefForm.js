@@ -67,9 +67,9 @@ function EditChefForm() {
     const fetchConfig = {
       method: "put",
       body: JSON.stringify(data),
+      credentials: "include",
       headers: {
         Authorization: `Bearer ${token}`,
-        credentials: "include",
         "Content-Type": "application/json",
       },
     };
