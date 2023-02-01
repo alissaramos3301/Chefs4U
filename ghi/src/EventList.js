@@ -33,7 +33,7 @@ function EventColumn(props) {
   };
   useEffect(() => {
     if (props.accountId === Number(props.id)) {
-      setButtonClasses("btn btn-info");
+      setButtonClasses("btn btn-info mb-3");
     }
     if (props.token) {
       setFavButtonClasses("btn btn-success");
@@ -61,11 +61,12 @@ function EventColumn(props) {
               <p className="card-text">
                 Attendee Capacity: {data.attendee_capacity}
               </p>
-              <p>
+              <p className="card-text">
                 Number of likes:{" "}
                 {data.users_favorited ? data.users_favorited.length : 0}
               </p>
             </div>
+
             <button
               className={buttonClasses}
               onClick={(e) => routeChange(data.id, e)}

@@ -141,9 +141,9 @@ function EventForm() {
             />
             <button className="btn btn-primary">Create</button>
           </form>
-          <div className={messageClasses} id="success-message">
-            Congratulations! You created an event!
-          </div>
+        </div>
+        <div className={messageClasses} id="success-message">
+          Congratulations! You created an event!
         </div>
       </div>
     </div>

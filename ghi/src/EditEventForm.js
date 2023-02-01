@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import "./EditEventForm.css";
 import { useToken } from "./Accounts/Authentication.js";
 
@@ -33,10 +33,29 @@ function EditEventForm() {
   const [pictureUrl, setPictureUrl] = useState("");
   const [attendeeCapacity, setAttendeeCapacity] = useState("");
   const { id } = useParams();
-  const [submitted, setSubmitted] = useState("alert alert-danger d-none");
+  const [submitted, setSubmitted] = useState("d-none");
+  const [successClasses, setSuccessClasses] = useState("d-none");
+  const [accountId, setAccountId] = useState(null);
+  const [deleted, setDeleted] = useState(false);
+  const navigate = useNavigate();
   const [token] = useToken();
 
   useEffect(() => {
+    async function fetchToken() {
+      const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/token`;
+      const fetchConfig = {
+        credentials: "include",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await fetch(url, fetchConfig);
+      if (response.ok) {
+        const data = await response.json();
+        setAccountId(data.account.id);
+      }
+    }
+
     async function fetchEvent() {
       const response = await fetch(
         `${process.env.REACT_APP_EVENTS_HOST}/api/events/${id}`
@@ -50,8 +69,17 @@ function EditEventForm() {
       setPictureUrl(data.picture_url);
       setAttendeeCapacity(data.attendee_capacity);
     }
+    fetchToken();
     fetchEvent();
-  }, [id]);
+  }, [token, id]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (deleted) {
+        navigate(`/chef/${accountId}`);
+      }
+    }, 3000);
+  }, [deleted, accountId, navigate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -76,6 +104,7 @@ function EditEventForm() {
       },
     };
     fetch(serviceUrl, fetchConfig);
+    setSuccessClasses("alert alert-success my-2");
   };
 
   const handleDelete = (event) => {
@@ -95,15 +124,21 @@ function EditEventForm() {
         setAddress("");
         setPictureUrl("");
         setAttendeeCapacity("");
-        setSubmitted("alert alert-danger");
+        setSubmitted("alert alert-danger my-5");
+        setDeleted(true);
       }
     });
   };
 
+  let formClasses = "shadow p-4 mt-4";
+  if (deleted) {
+    formClasses = "d-none";
+  }
+
   return (
     <div className="row">
       <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
+        <div className={formClasses}>
           <h1>Edit Event</h1>
           <form onSubmit={handleSubmit} id="edit-event-form">
             <BootstrapInput
@@ -171,9 +206,13 @@ function EditEventForm() {
               Delete
             </button>
           </form>
-          <div className={submitted} role="alert">
-            This Event has been deleted
-          </div>
+        </div>
+        <div className={submitted} role="alert">
+          This event has been deleted.
+        </div>
+        <div className={successClasses} role="alert">
+          Event successfully edited! Click{" "}
+          <Link to={`/chef/${accountId}`}>here</Link> to go back.
         </div>
       </div>
     </div>
