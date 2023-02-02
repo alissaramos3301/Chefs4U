@@ -113,7 +113,7 @@ function EditEventForm() {
     const fetchConfig = {
       method: "delete",
       credentials: "include",
-      header: {
+      headers: {
         Authorization: `Bearer ${token}`,
       },
     };

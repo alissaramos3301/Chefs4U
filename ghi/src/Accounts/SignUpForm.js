@@ -76,7 +76,7 @@ function SignUpForm(props) {
   }
 
   return (
-    <div className="container h-100">
+    <div className="container py-5 h-100">
       <div className="row d-flex justify-content-center align-items-center h-100">
         <div className="col-lg-12 col-xl-11">
           <div className="card text-black">
@@ -84,78 +84,92 @@ function SignUpForm(props) {
               <div className="row justify-content-center">
                 <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                   <Form className="login-form" onSubmit={handleSubmit}>
-                    <Form.Group controlId="formUsername">
-                      <Form.Label>Username</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter username"
-                        value={username}
-                        onChange={(event) => setUsername(event.target.value)}
-                      />
-                    </Form.Group>
-
-                    <Form.Group controlId="formPassword">
-                      <Form.Label>Password</Form.Label>
-                      <Form.Control
-                        type="password"
-                        placeholder="********"
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                      />
-                    </Form.Group>
-
-                    <Form.Group controlId="formName">
-                      <Form.Label>Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter name"
-                        value={name}
-                        onChange={(event) => setName(event.target.value)}
-                      />
-                    </Form.Group>
-
-                    <Form.Group controlId="formIsChef">
-                      <Form.Check
-                        type="switch"
-                        label="Are you a chef?"
-                        checked={isChef}
-                        onChange={(event) => setIsChef(event.target.checked)}
-                      />
-                    </Form.Group>
+                    <h4 className="mb-4 text-center">Sign up</h4>
+                    <div className="mb-2">
+                      <Form.Group controlId="formUsername">
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter username"
+                          value={username}
+                          onChange={(event) => setUsername(event.target.value)}
+                        />
+                      </Form.Group>
+                    </div>
+                    <div className="mb-2">
+                      <Form.Group controlId="formPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
+                          type="password"
+                          placeholder="********"
+                          value={password}
+                          onChange={(event) => setPassword(event.target.value)}
+                        />
+                      </Form.Group>
+                    </div>
+                    <div className="mb-2">
+                      <Form.Group controlId="formName">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter name"
+                          value={name}
+                          onChange={(event) => setName(event.target.value)}
+                        />
+                      </Form.Group>
+                    </div>
+                    <div className="my-2">
+                      <Form.Group controlId="formIsChef">
+                        <Form.Check
+                          type="switch"
+                          label="Are you a chef?"
+                          checked={isChef}
+                          onChange={(event) => setIsChef(event.target.checked)}
+                        />
+                      </Form.Group>
+                    </div>
 
                     {isChef && (
                       <>
-                        <Form.Group controlId="formPayRate">
-                          <Form.Label>Hourly Pay Rate</Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Enter hourly pay rate"
-                            value={payRate}
-                            onChange={(event) => setPayRate(event.target.value)}
-                          />
-                        </Form.Group>
-
-                        <Form.Group controlId="formCuisine">
-                          <Form.Label>Cuisine</Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Enter cuisine"
-                            value={cuisine}
-                            onChange={(event) => setCuisine(event.target.value)}
-                          />
-                        </Form.Group>
-
-                        <Form.Group controlId="formYearsOfExperience">
-                          <Form.Label>Years of Experience</Form.Label>
-                          <Form.Control
-                            type="number"
-                            placeholder="Enter years of experience"
-                            value={yearsOfExperience}
-                            onChange={(event) =>
-                              setYearsOfExperience(event.target.value)
-                            }
-                          />
-                        </Form.Group>
+                        <div className="mb-2">
+                          <Form.Group controlId="formPayRate">
+                            <Form.Label>Hourly Pay Rate</Form.Label>
+                            <Form.Control
+                              type="text"
+                              placeholder="Enter hourly pay rate"
+                              value={payRate}
+                              onChange={(event) =>
+                                setPayRate(event.target.value)
+                              }
+                            />
+                          </Form.Group>
+                        </div>
+                        <div className="mb-2">
+                          <Form.Group controlId="formCuisine">
+                            <Form.Label>Cuisine</Form.Label>
+                            <Form.Control
+                              type="text"
+                              placeholder="Enter cuisine"
+                              value={cuisine}
+                              onChange={(event) =>
+                                setCuisine(event.target.value)
+                              }
+                            />
+                          </Form.Group>
+                        </div>
+                        <div className="mb-2">
+                          <Form.Group controlId="formYearsOfExperience">
+                            <Form.Label>Years of Experience</Form.Label>
+                            <Form.Control
+                              type="number"
+                              placeholder="Enter years of experience"
+                              value={yearsOfExperience}
+                              onChange={(event) =>
+                                setYearsOfExperience(event.target.value)
+                              }
+                            />
+                          </Form.Group>
+                        </div>
 
                         <Form.Group controlId="formPictureUrl">
                           <Form.Label>Picture URL</Form.Label>
@@ -170,7 +184,7 @@ function SignUpForm(props) {
                         </Form.Group>
                       </>
                     )}
-                    <div className="mt-4">
+                    <div className="mt-3">
                       <Button variant="primary" type="submit">
                         Sign up
                       </Button>
